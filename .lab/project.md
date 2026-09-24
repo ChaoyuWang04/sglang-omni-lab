@@ -2,7 +2,7 @@
 
 > 上游 sgl-project/sglang-omni,默认分支 main。只写这个项目和别的项目不一样的地方;通用做法见 `~/1Project/oss/AGENTS.md`。
 
-接入状态:评审令牌 未设 · hlab `oss-sglang-omni` 未注册(都就绪后改成「就绪」)
+接入状态:评审令牌 已设(两个评审已验收) · hlab `oss-sglang-omni` 未注册(都就绪后改成「就绪」)
 
 ## 规矩
 

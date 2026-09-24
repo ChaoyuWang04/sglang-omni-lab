@@ -2,6 +2,8 @@
 
 > 上游 sgl-project/sglang-omni,默认分支 main。只写这个项目和别的项目不一样的地方;通用做法见 `~/1Project/oss/AGENTS.md`。
 
+接入状态:评审令牌 未设 · hlab `oss-sglang-omni` 未注册(都就绪后改成「就绪」)
+
 ## 规矩
 
 - 风格规范:`.claude/skills/code-review/coding-style.md`(根目录 AGENTS.md、CLAUDE.md 都指向它)。重点:不防不存在的情况、不用 getattr/hasattr 探字段、有 if 必有 else、名字表达物理含义、只用一次的小 helper 内联、注释只写 why 并署名 `# note (name):`、注释与 docstring 里不用反引号

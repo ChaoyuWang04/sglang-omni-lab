@@ -2,7 +2,7 @@
 
 > 上游 sgl-project/sglang-omni,默认分支 main。只写这个项目和别的项目不一样的地方;通用做法见 `~/1Project/oss/AGENTS.md`。
 
-接入状态:评审令牌 已设(两个评审已验收) · hlab `oss-sglang-omni` 未注册(都就绪后改成「就绪」)
+接入状态:评审令牌 已设(两个评审已验收) · hlab `oss-sglang-omni` 已注册,工作区 `oss-sglang-omni/lab` 已建、未绑定环境(都就绪后改成「就绪」)
 
 ## 规矩
 
@@ -10,11 +10,15 @@
 - 贡献指南:`docs/developer_reference/main.md`;PR 模板 `.github/pull_request_template.md`
 - 确定性检查:`pre-commit run --files <改动的文件>`,提交前 `pre-commit run --all-files`。本地 hook 里 `check_leading_underscore.py --fix` 会直接改名,`check_if_else.py` 只报告;两条都只管 `sglang_omni/`
 - 测试文件只能放 `tests/unit_test`、`tests/test_model`、`tests/test_ci`、`tests/utils`(Test Layout 检查)
+- 项目自带的 agent 守则与 skill:AGENTS.md 与 CLAUDE.md 是同一份;`.claude/skills` 有 model-profiling、omni-gpu-deep-dive、running-eval-suite(code-review 目录只放风格文档);`wire-skills.sh` 已把它们补到 `.agents/skills`,Codex 也看得到
+- AI 政策:未规定(AGENTS.md、PR 模板、`docs/developer_reference/` 里都没有相关条款)
+- 提交 trailer:无
+- 提交签名:无(未要求 DCO)
 
 ## 验证
 
 - CPU 测试:`pytest tests/unit_test/cpu/ -v`;上游通用单测 `pytest tests/ -m "not benchmark and not accelerator"`
-- GPU 测试:走 hlab 项目 `oss-sglang-omni`(待注册),环境与命令注册后补在这里。上游 GPU CI 跑在 H100,外部贡献者触发不了,所以 PR 的 Accuracy Test 与 Benchmark 两段靠我们自己在 5090 上测;5090 测不了的写明
+- GPU 测试:走 hlab 项目 `oss-sglang-omni`;环境按 `~/1Project/HOME-5090.md` 自建并绑定工作区后,命令补在这里。上游 GPU CI 跑在 H100,外部贡献者触发不了,所以 PR 的 Accuracy Test 与 Benchmark 两段靠我们自己在 5090 上测;5090 测不了的写明
 - 解读:interviewprep 的 `opensource/多模态/sglang-omni/`,基准 `89e60d0bf216`(v0.1.6)
 
 ## 上游惯例

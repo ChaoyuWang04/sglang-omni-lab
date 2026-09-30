@@ -8,7 +8,7 @@
 构建的记 BUILD_FAILED,负载的记 FAILED,原因里带报错原文。
 退出码:0 = PASSED 或 SKIPPED_HW;1 = 其余状态;2 = 用法或环境错误(还没开始做任何事:参数或 spec 不合法、
 status.json 已存在、查不到 compute capability、clean 越界等;不写 status.json)。
-只依赖 Python 标准库(>= 3.8)。本工具包新写,没有复制上游代码。
+只依赖 Python 标准库(>= 3.8)。
 """
 
 from __future__ import annotations

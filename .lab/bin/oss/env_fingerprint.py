@@ -4,7 +4,7 @@ CUDA 工具链、nsys 与 ncu 版本、torch 版本与编译时 CUDA、torch 编
 
 torch 在子进程里查(--python 指定解释器),本进程不建 CUDA 上下文、不占显存。
 退出码:0 = 采到了 GPU 信息(其余缺项写在 missing 里);1 = nvidia-smi 不可用或查询失败;2 = 用法错误。
-只依赖 Python 标准库(>= 3.8)。本工具包新写,没有复制上游代码。
+只依赖 Python 标准库(>= 3.8)。
 """
 
 from __future__ import annotations

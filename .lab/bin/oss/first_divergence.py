@@ -252,7 +252,7 @@ def main(argv=None):
         description="按层序比较两个目录的 .pt 张量 dump(float64 算 max_abs、rel、cos),"
                     "指出第一个越过阈值的层。需要 torch。",
         epilog="退出码:0 = 没有越线;1 = 找到越线的层;2 = 用法或环境错误。"
-               "默认阈值 cos < 0.99 或 rel > 0.10 越线,出处见 SOURCES.md。")
+               "默认阈值 cos < 0.99 或 rel > 0.10 越线。")
     p.add_argument("ref_dir", help="参照实现的 dump 目录")
     p.add_argument("test_dir", help="被测实现的 dump 目录")
     p.add_argument("--order", help="层序文件:每行一个名字(去掉 .pt 的相对路径,dict 展开后为 名字/键),# 开头为注释")

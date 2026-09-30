@@ -523,7 +523,7 @@ def main(argv=None):
     p = argparse.ArgumentParser(
         description="判断 nsys 稳态 step 里 host 开销是否为瓶颈(读 nsys 导出的 SQLite,输出 JSON)。",
         epilog="退出码:0 = 否;1 = 是;2 = 用法/环境错误或 INCONCLUSIVE。"
-               "阈值出处:" + THRESHOLD_SOURCE)
+               "阈值是起点值,本机重标后用 --*-threshold 覆盖。")
     p.add_argument("--trace", required=True, help="nsys export --type sqlite 得到的 .sqlite")
     p.add_argument("--step-regex", default=DEFAULT_STEP_REGEX,
                    help="匹配 step NVTX 文本的正则;命名分组 prefill、decode 可选(默认:%(default)s)")
@@ -535,7 +535,7 @@ def main(argv=None):
                    help="decode 只留 decode 请求数等于最大值的 step(两版对比时用)")
     p.add_argument("--device", type=int, help="只看这个 deviceId 的 GPU 活动")
     p.add_argument("--kernels-only", action="store_true",
-                   help="忙时间只并 kernel 表(复现上游口径;默认还并图记录与 memcpy/memset)")
+                   help="忙时间只并 kernel 表(只作对照;默认还并图记录与 memcpy/memset)")
     p.add_argument("--idle-threshold", type=float, help="all/prefill 的 GPU 空闲率阈值(默认 0.30)")
     p.add_argument("--decode-idle-threshold", type=float, help="decode 的 GPU 空闲率阈值(默认 0.15)")
     p.add_argument("--launch-threshold", type=float, default=LAUNCH_THRESHOLD,

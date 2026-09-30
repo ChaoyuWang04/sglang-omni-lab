@@ -422,7 +422,7 @@ def main(argv=None):
                     "按阈值判定,输出 JSON 与 Markdown 摘要表。",
         epilog="默认阈值(相对差小数):lm loss 噪声 1e-4、复审 1e-3;num-zeros 复审 1e-3;"
                "mem-allocated-bytes 与 mem-max-allocated-bytes 复审 1e-4;iteration-time 只报告;"
-               "其余指标只报告,除非给 --threshold 或 --default-threshold。出处见 SOURCES.md。"
+               "其余指标只报告,除非给 --threshold 或 --default-threshold。"
                "退出码:0 = 通过;1 = 有指标 review;2 = 用法或输入错误、写不出结果,或没有指标被判定。")
     p.add_argument("base", help="基线运行的指标日志")
     p.add_argument("cand", help="候选运行的指标日志")

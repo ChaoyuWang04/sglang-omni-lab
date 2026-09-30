@@ -459,7 +459,7 @@ def bench(arms: dict, make_inputs, ref, work=None, *, params=None, hot=(), hot_r
         if per_call >= 5 * l2:  # flashinfer:单份 >= 5×L2 时不轮换
             want = n_sets
             n_sets, cold, inner = 1, True, max(1, min_graph_calls)
-            res["warnings"].append(f"显存放不下 {want} 份输入;单份已 >= 5×L2,按 flashinfer 的做法不轮换")
+            res["warnings"].append(f"显存放不下 {want} 份输入;单份已 >= 5×L2,足够冷,不再轮换")
         else:
             raise EnvError(f"显存不够放 {n_sets} 份输入(约 {need / 2**30:.1f} GB,空闲 {free / 2**30:.1f} GB);"
                            "缩小形状、调小 --l2-factor、让 INPUTS 别为小视图分配大 storage,"
@@ -710,15 +710,15 @@ def build_parser() -> argparse.ArgumentParser:
     a("--hot", action="append", default=[], metavar="IDX|KEY", help="不轮换的参数(下标或关键字),必须配 --hot-reason")
     a("--hot-reason", help="为什么这些参数在真实形态里就是 L2 热的")
     a("--seed", type=int, default=0)
-    a("--warmup-calls", type=int, default=50, help="eager 预热次数(默认 50,TRT-LLM perf-workload-profiling)")
-    a("--warmup-s", type=float, default=3.0, help="计时前回放预热秒数(默认 3,cutlass:固定功耗下频率约 3 s 后稳定)")
-    a("--rounds", type=int, default=30, help="每方样本轮数(默认 30,flashinfer --num_iters)")
-    a("--min-calls", type=int, default=1000, help="每方至少计时的调用次数(默认 1000,cutlass)")
-    a("--min-graph-calls", type=int, default=10, help="每个 graph 至少捕获的调用数(默认 10,flashinfer num_iters_within_graph)")
+    a("--warmup-calls", type=int, default=50, help="eager 预热次数(默认 50)")
+    a("--warmup-s", type=float, default=3.0, help="计时前回放预热秒数(默认 3:固定功耗下频率约 3 s 后稳定)")
+    a("--rounds", type=int, default=30, help="每方样本轮数(默认 30)")
+    a("--min-calls", type=int, default=1000, help="每方至少计时的调用次数(默认 1000)")
+    a("--min-graph-calls", type=int, default=10, help="每个 graph 至少捕获的调用数(默认 10)")
     a("--min-round-us", type=float, default=1000.0, help="每轮至少多长,摊薄约 0.5 µs 的 event 分辨率(默认 1000)")
     a("--l2-bytes", type=int, help="L2 容量;不给就用驱动报告的 L2_cache_size")
     a("--l2-factor", type=float, default=2.0, help="同一份输入的 2 次复用之间流过的数据 >= 几倍 L2"
-                                                   "(默认 2,取自 cutlass 的 2×L2;flashinfer 与 sglang 用 5)")
+                                                   "(默认 2;5 为保守值)")
     a("--max-sets", type=int, default=2048, help="轮换份数上限,防止 graph 过大;触顶时 JSON 标 cold_l2=false")
     a("--peak-gbps", type=float, help="实测带宽峰值(klab probe 的 measured_copy_gbps)")
     a("--peak-tflops", type=float, help="同 dtype 的实测算力峰值")

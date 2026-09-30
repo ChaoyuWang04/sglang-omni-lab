@@ -17,8 +17,7 @@
             退出码:0 = 没有候选;1 = 有候选;2 = 用法或输入错误。
 
 snapshot 与 check 会像 git add 一样把未提交内容的 blob 写进对象库(不被引用,gc 时回收),所以只对自己的
-worktree 跑。scan 的候选模式参考了 vllm-omni precheck-pr(Apache-2.0)的 grep 与 oss-numerics-parity 的查法,
-出处见 skill 目录的 SOURCES.md;本文件是新写的代码。
+worktree 跑。
 
 结果一律以 JSON 输出到 stdout。
 """
